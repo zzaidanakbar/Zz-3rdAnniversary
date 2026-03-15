@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z + Z — Three Years of Us</title>
+<style>
+/* ============================================================
+   Z + Z Anniversary Website — Styles
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8d5a8;
+  --gold-dark: #a07d3f;
+  --blush: #f2e0d6;
+  --blush-dark: #e8c4b4;
+  --rose: #c97b7b;
+  --rose-deep: #a85858;
+  --cream: #faf6f0;
+  --dark: #2c2420;
+  --dark-soft: #4a3f38;
+  --warm-white: #fdfbf7;
+  --bg-main: var(--warm-white);
+  --text-main: var(--dark);
+  --text-soft: var(--dark-soft);
+  --card-bg: #fff;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
+}
+
+/* ---- Dark Mode ---- */
+body.dark-mode {
+  --bg-main: #1a1512;
+  --text-main: var(--cream);
+  --text-soft: #b8a99a;
+  --card-bg: #2c2420;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+::selection {
+  background: var(--gold-light);
+  color: var(--dark);
+}
+
+/* ---- Lock Screen ---- */
+#lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  background: linear-gradient(135deg, #1a1512 0%, var(--dark) 40%, #2a2118 70%, var(--dark-soft) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#lock-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.lock-z-monogram {
+  margin-bottom: 30px;
+}
+.lock-z-monogram svg {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 0 40px rgba(201,169,110,0.2));
+}
+.lock-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  color: var(--cream);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.lock-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 2vw, 18px);
+  font-style: italic;
+  color: var(--gold-light);
+  opacity: 0.7;
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+
+/* Countdown */
+.lock-countdown {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.countdown-unit {
+  text-align: center;
+  min-width: 70px;
+}
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.countdown-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.5;
+  margin-top: 4px;
+}
+.lock-anniversary-msg {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 32px);
+  color: var(--gold);
+  margin-bottom: 40px;
+  font-style: italic;
+  display: none;
+}
+
+/* Password */
+.lock-password-section {
+  margin-bottom: 30px;
+}
+.lock-password-wrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.lock-password-input {
+  width: 220px;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 30px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.lock-password-input::placeholder {
+  color: rgba(232,213,168,0.3);
+  letter-spacing: 3px;
+}
+.lock-password-input:focus {
+  border-color: var(--gold);
+}
+.lock-unlock-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  color: var(--dark);
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.lock-unlock-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(201,169,110,0.4);
+}
+.lock-error {
+  color: var(--rose);
+  font-size: 12px;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  letter-spacing: 1px;
+}
+.lock-error.show { opacity: 1; }
+.lock-hint {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gold-light);
+  opacity: 0.4;
+  margin-top: 30px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* ---- Music Prompt Overlay ---- */
+#music-prompt {
+  position: fixed;
+  inset: 0;
+  z-index: 15000;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+#music-prompt.active { display: flex; }
+.music-prompt-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+.music-prompt-text {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--cream);
+  font-style: italic;
+  margin-bottom: 8px;
+  max-width: 500px;
+  line-height: 1.4;
+}
+.music-prompt-song {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--gold-light);
+  opacity: 0.6;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+.music-prompt-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.music-prompt-play {
+  padding: 14px 36px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  border-radius: 30px;
+  color: var(--dark);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.music-prompt-play:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(201,169,110,0.4);
+}
+.music-prompt-skip {
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 30px;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.music-prompt-skip:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.8);
+}
+
+/* ---- Loading Screen ---- */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: linear-gradient(135deg, var(--dark) 0%, #3d322b 50%, var(--dark-soft) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loading-z-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-z {
+  font-family: var(--font-display);
+  font-size: 80px;
+  font-weight: 300;
+  color: var(--gold);
+  position: absolute;
+  animation: pulse 2s ease-in-out infinite;
+}
+.loading-z:first-child {
+  transform: translate(-15px, -5px);
+  animation-delay: 0s;
+}
+.loading-z:last-child {
+  transform: translate(15px, 5px);
+  animation-delay: 0.3s;
+}
+.loading-plus {
+  font-family: var(--font-display);
+  font-size: 30px;
+  color: var(--gold-light);
+  opacity: 0.7;
+  z-index: 1;
+}
+.loading-text {
+  font-family: var(--font-display);
+  color: var(--gold-light);
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin-top: 20px;
+  font-style: italic;
+  opacity: 0.8;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: translate(-15px, -5px) scale(1); }
+  50% { opacity: 1; transform: translate(-15px, -5px) scale(1.05); }
+}
+.loading-z:last-child { animation-name: pulse2; }
+@keyframes pulse2 {
+  0%, 100% { opacity: 0.6; transform: translate(15px, 5px) scale(1); }
+  50% { opacity: 1; transform: translate(15px, 5px) scale(1.05); }
+}
+
+/* ---- Hero Section ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--dark) 0%, #3d322b 40%, var(--dark-soft) 100%);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(201,123,123,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-z-monogram {
+  position: relative;
+  margin-bottom: 40px;
+}
+.hero-z-monogram svg {
+  width: 180px;
+  height: 180px;
+  filter: drop-shadow(0 0 30px rgba(201,169,110,0.3));
+}
+.hero-names {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.hero-names .ampersand {
+  color: var(--gold);
+  font-style: italic;
+  margin: 0 12px;
+  font-size: 0.8em;
+}
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-style: italic;
+  color: var(--gold-light);
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+.hero-date {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 40px;
+}
+.hero-stats {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.6;
+  margin-top: 6px;
+}
+
+/* Hero Countdown */
+.hero-countdown {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-countdown-unit {
+  text-align: center;
+}
+.hero-countdown-num {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 300;
+  color: var(--rose);
+  line-height: 1;
+}
+.hero-countdown-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.4;
+  margin-top: 4px;
+}
+.hero-countdown-msg {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 3vw, 26px);
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 40px;
+  display: none;
+}
+
+.hero-scroll-cta {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  opacity: 0.6;
+}
+.hero-scroll-cta:hover { opacity: 1; }
+.hero-scroll-cta span {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0) rotate(45deg); }
+  50% { transform: translateY(8px) rotate(45deg); }
+}
+
+/* ---- Timeline Navigation Bar ---- */
+.timeline-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(44,36,32,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201,169,110,0.2);
+  padding: 0;
+  transition: box-shadow 0.3s;
+}
+.timeline-nav.scrolled {
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+.timeline-nav-inner {
+  display: flex;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 60px;
+}
+.timeline-nav-brand {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--gold);
+  font-weight: 300;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  margin-right: 24px;
+  flex-shrink: 0;
+}
+.timeline-nav-brand span {
+  font-size: 14px;
+  color: var(--gold-light);
+  opacity: 0.5;
+  margin: 0 4px;
+}
+.timeline-progress-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+.timeline-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(201,169,110,0.15);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  min-width: 80px;
+}
+.timeline-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+.timeline-progress-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 11px;
+  height: 11px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  transition: left 0.3s ease;
+  left: 0%;
+}
+.timeline-nav-month {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 90px;
+  text-align: right;
+}
+.timeline-nav-controls {
+  display: flex;
+  gap: 6px;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+.nav-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: var(--gold);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+.nav-btn:hover {
+  background: rgba(201,169,110,0.15);
+  border-color: var(--gold);
+}
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ---- Nav Game Button ---- */
+.nav-game-btn {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: var(--gold);
+  border-radius: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+.nav-game-btn:hover {
+  background: rgba(201,169,110,0.15);
+  border-color: var(--gold);
+}
+
+/* ---- Game Banner (between hero and gallery) ---- */
+.game-banner {
+  max-width: 700px;
+  margin: -20px auto 40px;
+  text-align: center;
+  padding: 40px 24px;
+  background: linear-gradient(135deg, rgba(44,36,32,0.95), rgba(58,48,42,0.95));
+  border-radius: 20px;
+  border: 1px solid rgba(201,169,110,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.game-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.game-banner-emoji {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+.game-banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--cream);
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.game-banner-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--gold-light);
+  opacity: 0.6;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+.game-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  border-radius: 30px;
+  color: var(--dark);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.game-banner-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(201,169,110,0.4);
+}
+
+@media (max-width: 768px) {
+  .nav-game-btn span { display: none; }
+  .game-banner { margin: -10px 16px 30px; padding: 30px 16px; }
+}
+
+/* ---- Month Selector Dropdown ---- */
+.month-selector-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: var(--gold);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-size: 12px;
+  position: relative;
+}
+.month-selector-btn:hover {
+  background: rgba(201,169,110,0.15);
+  border-color: var(--gold);
+}
+.month-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: rgba(44,36,32,0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 12px;
+  padding: 12px;
+  display: none;
+  width: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 2000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.month-dropdown.open { display: block; }
+.month-dropdown-year {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--gold);
+  padding: 8px 8px 4px;
+  letter-spacing: 2px;
+}
+.month-dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.month-dropdown-item {
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--gold-light);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.month-dropdown-item:hover {
+  background: rgba(201,169,110,0.15);
+}
+.month-dropdown-item.active {
+  background: var(--gold);
+  color: var(--dark);
+  font-weight: 600;
+}
+.month-dropdown-item.milestone {
+  border: 1px solid rgba(201,123,123,0.4);
+}
+
+/* ---- Main Content ---- */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* ---- Animated Timeline Connector ---- */
+.timeline-connector {
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(201,169,110,0.1);
+  z-index: 1;
+}
+.timeline-connector-fill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--rose), var(--gold));
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0%;
+  transition: height 0.1s linear;
+  border-radius: 1px;
+}
+.timeline-dot {
+  position: absolute;
+  left: 40px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 2px solid rgba(201,169,110,0.3);
+  transform: translateX(-5px);
+  z-index: 2;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.timeline-dot.reached {
+  border-color: var(--gold);
+  background: var(--gold);
+  transform: translateX(-5px) scale(1.1);
+}
+.timeline-dot.milestone-dot {
+  width: 18px;
+  height: 18px;
+  transform: translateX(-8px);
+  border-color: var(--rose);
+}
+.timeline-dot.milestone-dot.reached {
+  background: var(--rose);
+  border-color: var(--rose);
+  transform: translateX(-8px) scale(1.1);
+  box-shadow: 0 0 12px rgba(201,123,123,0.4);
+}
+
+/* ---- Month Section ---- */
+.month-section {
+  padding: 80px 0 40px;
+  padding-left: 50px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  position: relative;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.month-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Season colors applied via JS */
+.month-section.season-spring { background: rgba(144,190,109,0.04); }
+.month-section.season-summer { background: rgba(230,180,80,0.05); }
+.month-section.season-autumn { background: rgba(200,130,70,0.04); }
+.month-section.season-winter { background: rgba(150,180,220,0.05); }
+
+body.dark-mode .month-section.season-spring { background: rgba(144,190,109,0.06); }
+body.dark-mode .month-section.season-summer { background: rgba(230,180,80,0.07); }
+body.dark-mode .month-section.season-autumn { background: rgba(200,130,70,0.06); }
+body.dark-mode .month-section.season-winter { background: rgba(150,180,220,0.07); }
+
+.month-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+.month-number {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+.month-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
+  color: var(--text-main);
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.month-photo-count {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-soft);
+  opacity: 0.5;
+  margin-top: 6px;
+}
+.month-note {
+  max-width: 500px;
+  margin: 16px auto 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-soft);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Milestone Badges */
+.milestone-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--warm-white);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(201,169,110,0.3);
+}
+.milestone-badge.anniversary {
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  box-shadow: 0 4px 15px rgba(201,123,123,0.3);
+}
+
+/* ---- Photo Grid ---- */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+.photo-item {
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--blush);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+body.dark-mode .photo-item { background: #3a302a; }
+.photo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.photo-item:hover img {
+  transform: scale(1.05);
+}
+.photo-item.wide {
+  grid-column: span 2;
+  aspect-ratio: 2/1;
+}
+
+/* ---- Lightbox ---- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.2); }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+.lightbox-month-label {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+}
+
+/* ---- Slideshow Button ---- */
+.slideshow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: var(--gold-dark);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  margin-top: 12px;
+}
+body.dark-mode .slideshow-btn { color: var(--gold-light); }
+.slideshow-btn:hover {
+  background: rgba(201,169,110,0.1);
+  border-color: var(--gold);
+}
+
+/* ---- Guess the Month Game ---- */
+#game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(20px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#game-modal.active { display: flex; }
+.game-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+.game-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.game-score {
+  font-size: 13px;
+  color: var(--gold-light);
+  opacity: 0.6;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.game-photo-wrapper {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin: 0 auto 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #2c2420;
+}
+.game-photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+.game-option {
+  padding: 14px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: var(--gold-light);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.game-option:hover {
+  background: rgba(201,169,110,0.1);
+  border-color: var(--gold);
+}
+.game-option.correct {
+  background: rgba(76,175,80,0.3);
+  border-color: #4caf50;
+  color: #a5d6a7;
+}
+.game-option.wrong {
+  background: rgba(244,67,54,0.2);
+  border-color: #f44336;
+  color: #ef9a9a;
+}
+.game-option:disabled { cursor: default; }
+.game-result {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  min-height: 30px;
+  font-style: italic;
+}
+.game-next-btn {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  border-radius: 30px;
+  color: var(--dark);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: none;
+}
+.game-next-btn:hover { transform: scale(1.05); }
+.game-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-close:hover { background: rgba(255,255,255,0.2); }
+
+/* ---- Footer ---- */
+.site-footer {
+  background: linear-gradient(135deg, var(--dark) 0%, #3d322b 100%);
+  color: var(--cream);
+  text-align: center;
+  padding: 80px 20px;
+  margin-top: 60px;
+}
+.footer-z-symbol {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--gold);
+  font-weight: 300;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+}
+.footer-message {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 28px);
+  font-style: italic;
+  color: var(--gold-light);
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+}
+.footer-names {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  opacity: 0.6;
+}
+.footer-date {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold-light);
+  opacity: 0.3;
+  margin-top: 8px;
+}
+
+/* ---- Fixed Bottom Buttons ---- */
+.fixed-btns {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fab {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(44,36,32,0.9);
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+.fab:hover {
+  background: rgba(44,36,32,1);
+  border-color: var(--gold);
+  transform: scale(1.05);
+}
+
+/* Music Toggle */
+.music-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+.music-bar {
+  width: 3px;
+  background: var(--gold);
+  border-radius: 1px;
+  transition: height 0.3s;
+}
+.fab.playing .music-bar:nth-child(1) { animation: musicBar 0.8s ease-in-out infinite alternate; }
+.fab.playing .music-bar:nth-child(2) { animation: musicBar 0.6s ease-in-out 0.1s infinite alternate; }
+.fab.playing .music-bar:nth-child(3) { animation: musicBar 0.9s ease-in-out 0.2s infinite alternate; }
+.fab.playing .music-bar:nth-child(4) { animation: musicBar 0.7s ease-in-out 0.15s infinite alternate; }
+.fab:not(.playing) .music-bar { height: 4px !important; }
+@keyframes musicBar {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+/* Dark mode toggle icon */
+.theme-icon { font-size: 18px; }
+
+/* Game button icon */
+.game-icon { font-size: 16px; letter-spacing: 0; }
+
+/* Back to Top */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1500;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(44,36,32,0.9);
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+}
+.back-to-top.show { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: rgba(44,36,32,1); border-color: var(--gold); }
+
+/* ---- Dividers ---- */
+.month-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  padding-left: 50px;
+}
+.month-divider-line {
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+.month-divider-symbol {
+  margin: 0 16px;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 18px;
+  opacity: 0.4;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .hero-stats { gap: 30px; }
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .photo-item.wide { grid-column: span 1; aspect-ratio: 1; }
+  .timeline-nav-brand { display: none; }
+  .timeline-nav-inner { padding: 0 12px; }
+  .timeline-nav-month { min-width: 70px; font-size: 10px; }
+  .month-section { padding: 60px 0 30px; padding-left: 40px; }
+  .month-divider { padding-left: 40px; }
+  .timeline-connector { left: 24px; }
+  .timeline-dot { left: 24px; }
+  .timeline-dot { transform: translateX(-5px); }
+  .timeline-dot.milestone-dot { transform: translateX(-8px); }
+  .lightbox-nav { width: 40px; height: 40px; font-size: 14px; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+  .game-options { grid-template-columns: 1fr; }
+  .lock-countdown { gap: 12px; }
+}
+@media (max-width: 480px) {
+  .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .month-title { font-size: 28px; }
+  .hero-names { letter-spacing: 1px; }
+  .month-section { padding-left: 30px; }
+  .month-divider { padding-left: 30px; }
+  .timeline-connector { left: 14px; }
+  .timeline-dot { left: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Lock Screen -->
+<div id="lock-screen">
+  <div class="lock-z-monogram">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="95" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="80" stroke="rgba(201,169,110,0.1)" stroke-width="0.5"/>
+      <text x="62" y="125" font-family="'Cormorant Garamond', serif" font-size="72" font-weight="300" fill="rgba(201,169,110,0.7)">Z</text>
+      <text x="94" y="108" font-family="'Cormorant Garamond', serif" font-size="24" font-style="italic" fill="rgba(232,213,168,0.4)">&amp;</text>
+      <text x="108" y="125" font-family="'Cormorant Garamond', serif" font-size="72" font-weight="300" fill="rgba(201,123,123,0.6)">Z</text>
+    </svg>
+  </div>
+
+  <h1 class="lock-title">Zaidan & Zesira</h1>
+  <p class="lock-subtitle">Three Years of Us</p>
+
+  <!-- Countdown to April 20, 2026 -->
+  <div class="lock-countdown" id="lock-countdown">
+    <div class="countdown-unit">
+      <div class="countdown-number" id="lock-days">--</div>
+      <div class="countdown-label">Days</div>
+    </div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="lock-hours">--</div>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="lock-mins">--</div>
+      <div class="countdown-label">Minutes</div>
+    </div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="lock-secs">--</div>
+      <div class="countdown-label">Seconds</div>
+    </div>
+  </div>
+  <div class="lock-anniversary-msg" id="lock-anniversary-msg">Happy 3rd Anniversary!</div>
+
+  <!-- Password -->
+  <div class="lock-password-section">
+    <div class="lock-password-wrapper">
+      <input type="password" class="lock-password-input" id="lock-password" placeholder="enter password" autocomplete="off">
+      <button class="lock-unlock-btn" id="lock-unlock-btn" onclick="attemptUnlock()">&#9654;</button>
+    </div>
+    <div class="lock-error" id="lock-error">That's not quite right. Try again.</div>
+  </div>
+
+  <p class="lock-hint">I'll give you the key to our story on the day it matters most.</p>
+</div>
+
+<!-- Music Prompt -->
+<div id="music-prompt">
+  <div class="music-prompt-icon">&#9835;</div>
+  <p class="music-prompt-text">For the full experience, let our song set the mood...</p>
+  <p class="music-prompt-song">Bonfire Heart</p>
+  <div class="music-prompt-btns">
+    <button class="music-prompt-play" onclick="acceptMusicPrompt()">&#9654; Play Our Song</button>
+    <button class="music-prompt-skip" onclick="skipMusicPrompt()">Continue in silence</button>
+  </div>
+</div>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-z-container">
+    <div class="loading-z">Z</div>
+    <div class="loading-plus">+</div>
+    <div class="loading-z">Z</div>
+  </div>
+  <div class="loading-text">loading our journey...</div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-z-monogram">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="95" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="80" stroke="rgba(201,169,110,0.1)" stroke-width="0.5"/>
+      <text x="62" y="125" font-family="'Cormorant Garamond', serif" font-size="72" font-weight="300" fill="rgba(201,169,110,0.7)">Z</text>
+      <text x="94" y="108" font-family="'Cormorant Garamond', serif" font-size="24" font-style="italic" fill="rgba(232,213,168,0.4)">&amp;</text>
+      <text x="108" y="125" font-family="'Cormorant Garamond', serif" font-size="72" font-weight="300" fill="rgba(201,123,123,0.6)">Z</text>
+      <text x="88" y="158" font-family="serif" font-size="14" fill="rgba(201,169,110,0.4)">&#9825;</text>
+    </svg>
+  </div>
+
+  <h1 class="hero-names">Zaidan <span class="ampersand">&amp;</span> Zesira</h1>
+  <p class="hero-tagline">Two Z's, One Beautiful Journey</p>
+  <p class="hero-date">April 2023 — Forever</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-number">3</div>
+      <div class="hero-stat-label">Years</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number">36</div>
+      <div class="hero-stat-label">Months</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number" id="photo-total-count">0</div>
+      <div class="hero-stat-label">Memories</div>
+    </div>
+  </div>
+
+  <!-- Hero Countdown -->
+  <div class="hero-countdown" id="hero-countdown">
+    <div class="hero-countdown-unit">
+      <div class="hero-countdown-num" id="hero-cd-days">--</div>
+      <div class="hero-countdown-label">Days</div>
+    </div>
+    <div class="hero-countdown-unit">
+      <div class="hero-countdown-num" id="hero-cd-hours">--</div>
+      <div class="hero-countdown-label">Hours</div>
+    </div>
+    <div class="hero-countdown-unit">
+      <div class="hero-countdown-num" id="hero-cd-mins">--</div>
+      <div class="hero-countdown-label">Minutes</div>
+    </div>
+    <div class="hero-countdown-unit">
+      <div class="hero-countdown-num" id="hero-cd-secs">--</div>
+      <div class="hero-countdown-label">Seconds</div>
+    </div>
+  </div>
+  <div class="hero-countdown-msg" id="hero-countdown-msg">Celebrating 3 Years!</div>
+
+  <div class="hero-scroll-cta" onclick="document.getElementById('month-1').scrollIntoView({behavior:'smooth'})">
+    <span>Begin Our Story</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Timeline Navigation -->
+<nav class="timeline-nav" id="timeline-nav">
+  <div class="timeline-nav-inner">
+    <div class="timeline-nav-brand">Z <span>&</span> Z</div>
+    <div class="timeline-progress-container">
+      <div class="timeline-progress-bar" id="progress-bar">
+        <div class="timeline-progress-fill" id="progress-fill"></div>
+        <div class="timeline-progress-dot" id="progress-dot"></div>
+      </div>
+    </div>
+    <div class="timeline-nav-month" id="current-month-label">Apr 2023</div>
+    <div class="timeline-nav-controls">
+      <button class="nav-btn" id="prev-btn" title="Previous month" onclick="navigateMonth(-1)">&#8592;</button>
+      <button class="nav-btn" id="next-btn" title="Next month" onclick="navigateMonth(1)">&#8594;</button>
+      <button class="nav-game-btn" title="Guess the Month!" onclick="openGame()">&#127922; Play</button>
+      <div style="position:relative">
+        <button class="month-selector-btn" id="month-selector-btn" title="Jump to month" onclick="toggleMonthDropdown()">&#9783;</button>
+        <div class="month-dropdown" id="month-dropdown"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Game Banner -->
+<div class="game-banner">
+  <div class="game-banner-emoji">&#127922;</div>
+  <h2 class="game-banner-title">Guess the Month</h2>
+  <p class="game-banner-desc">Think you remember when each photo was taken? Test your memory of our journey together.</p>
+  <button class="game-banner-btn" onclick="openGame()">&#9654; Let's Play</button>
+</div>
+
+<!-- Month Sections Container -->
+<main class="main-content" id="gallery-container">
+  <!-- Timeline connector line -->
+  <div class="timeline-connector" id="timeline-connector">
+    <div class="timeline-connector-fill" id="timeline-connector-fill"></div>
+  </div>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-month-label" id="lightbox-month"></div>
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Photo">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<!-- Guess the Month Game -->
+<div id="game-modal">
+  <button class="game-close" onclick="closeGame()">&times;</button>
+  <div class="game-container">
+    <h2 class="game-title">Guess the Month</h2>
+    <div class="game-score" id="game-score">0 / 0</div>
+    <div class="game-photo-wrapper">
+      <img id="game-photo" src="" alt="Guess this month">
+    </div>
+    <div class="game-options" id="game-options"></div>
+    <div class="game-result" id="game-result"></div>
+    <button class="game-next-btn" id="game-next-btn" onclick="nextGameRound()">Next Photo</button>
+  </div>
+</div>
+
+<!-- Fixed Bottom Buttons -->
+<div class="fixed-btns">
+  <button class="fab" id="music-toggle" title="Toggle music" onclick="toggleMusic()">
+    <div class="music-bars">
+      <div class="music-bar" style="height:8px"></div>
+      <div class="music-bar" style="height:12px"></div>
+      <div class="music-bar" style="height:6px"></div>
+      <div class="music-bar" style="height:14px"></div>
+    </div>
+  </button>
+  <button class="fab" id="theme-toggle" title="Toggle dark/light mode" onclick="toggleTheme()">
+    <span class="theme-icon" id="theme-icon">&#9790;</span>
+  </button>
+</div>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-z-symbol">Z &hearts; Z</div>
+  <p class="footer-message">
+    Every month, every photo, every moment — they all led us here.<br>
+    Here's to three years of us, and to every year still to come.
+  </p>
+  <p class="footer-names">Zaidan & Zesira</p>
+  <p class="footer-date">April 2023 — April 2026</p>
+</footer>
+
+<script>
+/* ============================================================
+   IMAGE MANIFEST
+   ============================================================
+   To add new months:
+   1. Create the folder (e.g., "36. Mar 2026")
+   2. Convert any HEIC files to JPG using:
+      sips -s format jpeg -s formatOptions 85 INPUT.heic --out OUTPUT.jpg
+   3. Add the folder entry below with all image filenames
+   — OR just run ./update-photos.sh
+   ============================================================ */
+const IMAGE_MANIFEST = {
+  "01. Apr 2023": ["IMG_0942.jpg","IMG_0950.jpg","IMG_0987.jpg","IMG_1132.jpg","IMG_1135.jpg","IMG_1255.jpg"],
+  "02. May 2023": ["IMG_4953.jpg","IMG_4980.jpg","IMG_5013.jpg","IMG_5169.JPG","IMG_5177.JPG","IMG_5180.JPG"],
+  "03. Jun 2023": ["IMG_5138.jpg","IMG_5324.jpg","IMG_5359.jpg","IMG_5361.jpg","IMG_5379.jpg","IMG_5392.jpg","IMG_5422.jpg","IMG_5451.jpg","IMG_5746.jpg","IMG_5998.JPG","IMG_6013.jpg","IMG_6071.jpg","IMG_6148.jpg","IMG_6171.jpg"],
+  "04. Jul 2023": ["IMG_7675.jpg","IMG_7719.jpg","IMG_7728.jpg","IMG_7779.jpg","IMG_7842.jpg","IMG_7872.jpg","IMG_7893.jpg","IMG_7978.jpg","IMG_7998.jpg"],
+  "05. Aug 2023": ["IMG_0605 2.jpg","IMG_0626 2.jpg","IMG_6138 2.JPG","IMG_8243 2.jpg","IMG_8250 2.jpg","IMG_8408 2.jpg","IMG_8434 2.jpg","IMG_8464 2.jpg","IMG_8524 2.jpg","IMG_8575 2.jpg","IMG_8606 2.jpg","IMG_8629 2.jpg","IMG_8655 2.jpg","IMG_8799 2.jpg"],
+  "06. Sep 2023": ["IMG_9727.jpg","IMG_9743.jpg","IMG_9812.jpg","IMG_9907.jpg","e27099f3-0553-4888-90be-1172c5469848.JPG"],
+  "07. Oct 2023": ["12853E03-5871-45CA-9586-2BBAD1191A60.JPG","86073E0F-E68E-46B1-B8B1-654892CC7ED4.JPG","IMG_0346.jpg","IMG_1124.jpg","IMG_1125.jpg"],
+  "08. Nov 2023": ["IMG_0719.jpg","IMG_0751.jpg","IMG_0764.JPG","IMG_0772.JPG","IMG_0775.JPG"],
+  "09. Dec 2023": ["EA9F2CF7-0983-4FE4-A3E5-F8EBFCB4E364.JPG","IMG_2159.jpg","IMG_2163.jpg","IMG_2181.jpg","IMG_8724.JPEG"],
+  "10. Jan 2024": ["IMG_0492.JPEG","IMG_2321.jpg","IMG_2332.jpg","IMG_2342.jpg","IMG_2352.jpg","IMG_2449 2.jpg","IMG_2452.jpg","IMG_2457.jpg","IMG_2730.jpg","IMG_2781.jpg","IMG_2796.jpg","IMG_2830.jpg","IMG_3032.JPEG","IMG_3145.jpg","IMG_3147.jpg","IMG_3149.jpg","IMG_3163.jpg","IMG_3167.jpg","IMG_3172.jpg","IMG_3179.jpg","IMG_3216.jpg","IMG_3323.jpg"],
+  "11. Feb 2024": ["IMG_3366.jpg","IMG_3473.jpg","IMG_3497.jpg","IMG_3537.jpg","IMG_3549.jpg","IMG_3578.jpg","IMG_3601.jpg","IMG_3625.jpg","IMG_3626.jpg","IMG_3628.jpg","IMG_3684.jpg","IMG_3711.jpg","IMG_3718.jpg","IMG_3765.jpg","IMG_3863.jpg","IMG_3878.jpg","IMG_3901.jpg","IMG_3948.jpg","IMG_4102.jpg","IMG_4139.jpg","IMG_4177.jpg","IMG_5527.JPEG","IMG_5546.JPEG"],
+  "12. Mar 2024": ["IMG_4243.jpg","IMG_4371.jpg","IMG_4387.jpg","IMG_4540.jpg","IMG_4635.jpg","IMG_4662.jpg","IMG_5008.jpg","IMG_5016.jpg","IMG_5219.jpg","IMG_8836.jpg"],
+  "13. Apr 2024": ["10fb8fcc-c8d1-401d-8997-bfde51946961.JPG","IMG_5420.jpg","IMG_5430.jpg","IMG_5442.jpg","IMG_5636.jpg","IMG_5869.jpg","IMG_5957.jpg","IMG_5994.jpg","IMG_6034.JPG","IMG_6053.jpg","IMG_6227.jpg","IMG_6287.jpg","IMG_6376.jpg","IMG_6382.jpg","IMG_6386.jpg"],
+  "14. May 2024": ["3f16c581-5718-4527-a8f2-06236dc74653.JPG","6fe2a346-2956-42e9-a411-8bbf27b73fc3.JPG","IMG_0197.jpg","IMG_0212.jpg","IMG_0324.jpg","IMG_0374.jpg","IMG_0383.jpg","IMG_0516.jpg","IMG_0546.jpg","IMG_0605.jpg","IMG_0784.jpg","IMG_0793.jpg","IMG_1001.jpg","IMG_1009.jpg","IMG_1101.JPEG","IMG_6419.jpg","IMG_6429.jpg","IMG_6475.PNG","IMG_6476.PNG","IMG_6660.jpg","IMG_6883.jpg","IMG_7228.jpg","IMG_7234.jpg","IMG_7443.jpg"],
+  "15. Jun 2024": ["IMG_1318.jpg","IMG_7038.JPG","IMG_7614.jpg","IMG_7644.jpg","IMG_7647.jpg","IMG_7651.jpg","IMG_7755.jpg","IMG_7830.jpg","IMG_8105.jpg","IMG_8323.jpg","IMG_8333.jpg"],
+  "16. Jul 2024": ["IMG_4135.jpg","IMG_4217.jpg","IMG_4226.jpg","IMG_8517.jpg","IMG_8623.jpg","IMG_8631.jpg","IMG_8704.jpg","IMG_8765.jpg","IMG_8817.jpg"],
+  "17. Aug 2024": ["IMG_0028.jpg","IMG_0089.jpg","IMG_0171.jpg","IMG_0220.jpg","IMG_9334.jpg","IMG_9353.jpg","IMG_9361.jpg","IMG_9379.jpg","IMG_9404.jpg","IMG_9780.jpg","IMG_9783.jpg","IMG_9893.jpg"],
+  "18. Sep 2024": ["6b67efab-e67a-4043-9478-b7eae24aea59.JPG","IMG_0395.jpg","IMG_0418.jpg","IMG_0488.jpg","IMG_0499.jpg","IMG_0683.jpg","IMG_0725.jpg","IMG_0904.jpg","IMG_0919.jpg","IMG_1474.jpg","IMG_2162.jpg","IMG_7626 3.jpg","IMG_7660.jpg","PHOTO-2024-09-11-14-59-57.jpg","PHOTO-2024-09-19-20-50-59.jpg","PHOTO-2024-09-23-08-09-23.jpg","PHOTO-2024-09-28-05-15-13.jpg"],
+  "19. Oct 2024": ["633F40E8-3B19-403E-8C29-94BD2DB5B072.JPG","IMG_0294.jpg","IMG_2292.jpg","IMG_2293.jpg","IMG_2294.jpg","IMG_2295.jpg","IMG_2296.jpg","IMG_2297.jpg","IMG_2488.jpg","IMG_2525.jpg","IMG_2554.jpg","IMG_2778.jpg","IMG_2871.jpg","IMG_2881.jpg","IMG_3060.jpg","IMG_3208.jpg","PHOTO-2024-10-05-17-59-36.jpg","PHOTO-2024-10-05-18-02-07.jpg","PHOTO-2024-10-12-15-45-01.jpg","PHOTO-2024-10-13-16-10-48.jpg","PHOTO-2024-10-26-11-06-50.jpg","PHOTO-2024-10-26-11-09-33.jpg"],
+  "20. Nov 2024": ["18f1ebf5-6adb-4d3a-aa0a-893ca5e5c566.JPG","2b0effa1-6b06-42a5-85c9-7f9ddca63daf.jpg","IMG_0481.jpg","IMG_1505.JPG","IMG_4290.jpg","IMG_4402.jpg","IMG_4695.jpg","IMG_4767.jpg","IMG_4769.jpg","IMG_4787.jpg","IMG_4796.jpg","PHOTO-2024-11-04-17-40-58.jpg","PHOTO-2024-11-07-16-14-16.jpg","PHOTO-2024-11-07-16-14-17.jpg","PHOTO-2024-11-07-16-35-17.jpg","PHOTO-2024-11-09-13-37-49.jpg","PHOTO-2024-11-17-19-50-20.jpg","PHOTO-2024-11-17-20-47-17.jpg","PHOTO-2024-11-22-15-53-27.jpg","PHOTO-2024-11-26-13-27-29.jpg","PHOTO-2024-11-30-12-34-52.jpg","PHOTO-2024-11-30-13-42-36.jpg"],
+  "21. Dec 2024": ["0c1a9cfc-8a41-40a7-8c32-f6523f480419.JPG","226fde9a-1c3c-4152-b603-8738e30331a6.JPG","910e9076-5e8b-4563-b30f-958f39ee369f.JPG","F43FCE50-B29E-499D-9F73-DDE713DF4A1D.JPG","IMG_5279.jpg","IMG_5527.jpg","IMG_5575.jpg","IMG_5671.jpg","IMG_5737.jpg","IMG_5855.jpg","IMG_5863.jpg","IMG_5879.jpg","PHOTO-2024-12-10-23-41-06.jpg","PHOTO-2024-12-21-13-21-44.jpg","PHOTO-2024-12-28-22-59-51.jpg"],
+  "22. Jan 2025": ["AC2B8E10-A2F6-4C7A-BA77-1CBE1AA35F6F.JPG","B4CF417B-6FE0-4C0A-B729-32518448492E.JPG","IMG_1542.jpg","IMG_1621.jpg","IMG_1937.jpg","IMG_2026.jpg","IMG_2132 2.jpg","IMG_5579.jpg","IMG_6607.jpg","IMG_6617.jpg","IMG_7662.jpg","PHOTO-2025-01-02-22-03-36.jpg","PHOTO-2025-01-05-10-28-13.jpg","PHOTO-2025-01-22-16-39-32.jpg","PHOTO-2025-01-22-18-33-19.jpg","PHOTO-2025-01-22-23-07-45.jpg"],
+  "23. Feb 2025": ["FullSizeRender.JPG","IMG_8174.jpg","IMG_8181.jpg","IMG_8201.jpg","IMG_8218.jpg","IMG_8607.jpg","PHOTO-2025-02-07-14-38-08.jpg","PHOTO-2025-02-08-15-54-00.jpg","PHOTO-2025-02-15-00-44-13.jpg"],
+  "24. Mar 2025": ["IMG_0712.PNG","IMG_8913.jpg","IMG_8916.jpg","IMG_9057.jpg","IMG_9271.jpg","IMG_9427 3.jpg","IMG_9556.jpg","PHOTO-2025-03-01-19-59-03.jpg","PHOTO-2025-03-01-20-32-44.jpg","PHOTO-2025-03-04-03-35-49.jpg","PHOTO-2025-03-07-02-14-30.jpg","PHOTO-2025-03-15-21-17-48.jpg","PHOTO-2025-03-18-15-53-45.jpg","PHOTO-2025-03-27-19-46-15.jpg","PHOTO-2025-03-28-17-09-33.jpg","PHOTO-2025-03-31-09-27-31.jpg","PHOTO-2025-03-31-15-43-37.jpg"],
+  "25. Apr 2025": ["IMG_0196.jpg","IMG_0319.jpg","IMG_7727.JPG","IMG_9629 2.jpg","IMG_9659.jpg","IMG_9818.jpg","PHOTO-2025-04-01-14-14-11.jpg","PHOTO-2025-04-02-08-43-38.jpg","PHOTO-2025-04-08-19-29-40.jpg","PHOTO-2025-04-09-17-38-46.jpg","PHOTO-2025-04-09-20-26-39 2.jpg","PHOTO-2025-04-09-20-26-39.jpg","PHOTO-2025-04-15-22-15-42.jpg","PHOTO-2025-04-20-16-58-54.jpg","PHOTO-2025-04-21-03-47-21.jpg","PHOTO-2025-04-22-18-09-16.jpg","PHOTO-2025-04-27-03-02-20.jpg","PHOTO-2025-05-01-05-38-00.jpg","lp_image.jpg"],
+  "26. May 2025": ["19929227-d7d9-44f4-aea0-bd03dd7fcb07.JPG","5b01134d-882b-49fd-ab0c-32cce45677eb.JPG","69ac2e77-dbc5-474b-9ae3-7410f1dda39d.JPG","7673D23A-41B5-4CFF-9185-77DBC99FB577.jpg","IMG_0923.jpg","IMG_1570.jpg","IMG_1574.jpg","IMG_1575.jpg","IMG_1697.jpg","IMG_1720.jpg","IMG_1906.jpg","PHOTO-2025-05-01-03-46-16 2.jpg","PHOTO-2025-05-01-03-46-16.jpg","PHOTO-2025-05-01-12-03-31.jpg","PHOTO-2025-05-02-23-56-28.jpg","PHOTO-2025-05-04-00-37-15.jpg","PHOTO-2025-05-06-08-30-03.jpg","PHOTO-2025-05-06-10-00-02.jpg","PHOTO-2025-05-14-12-39-15.jpg","PHOTO-2025-05-17-21-43-58.jpg","PHOTO-2025-05-17-23-41-58.jpg","PHOTO-2025-05-18-04-56-42.jpg","PHOTO-2025-05-23-20-52-40.jpg","PHOTO-2025-05-25-22-16-43 2.jpg","bcf09dc2-6ec2-41d8-945c-27654deb403d.JPG"],
+  "27. Jun 2025": ["2a43c45e-2ba1-402b-838b-aea99180ba23.JPG","IMG_2145.jpg","IMG_2213.jpg","IMG_2251.jpg","IMG_2436.jpg","IMG_2443.jpg","IMG_2629.jpg","IMG_2735.jpg","IMG_3014.jpg","IMG_3123.jpg","IMG_5880.jpg","IMG_5887.jpg","PHOTO-2025-06-06-15-32-08.jpg","PHOTO-2025-06-09-09-03-51.jpg","PHOTO-2025-06-12-23-18-41 2.jpg","PHOTO-2025-06-12-23-18-41.jpg","PHOTO-2025-06-13-03-20-02.jpg","PHOTO-2025-06-16-18-32-08 2.jpg","PHOTO-2025-06-17-21-24-53.jpg","PHOTO-2025-06-17-21-27-22.jpg","PHOTO-2025-06-20-22-04-30.jpg"],
+  "28. Jul 2025": ["1030034.JPG","50928bab-8a0f-4023-b782-6dfbf56d8d86.JPG","6b7715f5-16d1-4a1e-bbac-e72ebfed41b8.JPG","9d85fc1a-3007-4655-9d6c-bb7938843568.JPG","IMG_2227.jpg","IMG_3258.jpg","IMG_3265.jpg","IMG_3523.jpg","IMG_3588.jpg","IMG_6037.jpg","IMG_6066.jpg","IMG_6080.jpg","PHOTO-2025-07-03-13-31-05.jpg","PHOTO-2025-07-16-00-52-15.jpg","PHOTO-2025-07-17-13-09-04.jpg","PHOTO-2025-07-18-22-55-02 2.jpg","PHOTO-2025-07-18-22-55-02.jpg","PHOTO-2025-07-18-22-56-23.jpg","PHOTO-2025-07-28-15-45-43.jpg","PHOTO-2025-07-28-20-32-25.jpg","b5effe42-9789-4e31-b028-b966569327dd.JPG"],
+  "29. Aug 2025": ["670a217e-d12d-4cee-8181-2a67d544abf7.JPG","73F4C463-265B-4EAA-ADA1-224B34AE21F7.JPG","747b03c7-8489-4b6d-b8a9-434f1d27101c.JPG","995e742e-3bb6-4a32-8b75-9592b9c3c9b9.JPG","AE79309B-7B4B-4A5C-8406-E4E95B99EC79.JPG","E51D7994-C302-4563-A5FA-C2F7555B52DB.JPG","IMG_1197.jpg","IMG_4561.jpg","IMG_4600.jpg","IMG_4786.jpg","IMG_4792.jpg","IMG_5068.jpg","IMG_5082.jpg","IMG_5086.jpg","IMG_5248.jpg","IMG_5327 2.jpg","IMG_9943.jpg","PHOTO-2025-08-01-17-27-56.jpg","PHOTO-2025-08-02-14-06-19.jpg","PHOTO-2025-08-03-00-25-43.jpg","PHOTO-2025-08-03-13-40-07.jpg","PHOTO-2025-08-03-22-02-58.jpg","PHOTO-2025-08-03-22-03-07.jpg","PHOTO-2025-08-04-17-02-23.jpg","PHOTO-2025-08-06-10-51-34.jpg","PHOTO-2025-08-09-22-31-22.jpg","PHOTO-2025-08-10-02-00-11.jpg","PHOTO-2025-08-11-05-32-40.jpg","PHOTO-2025-08-15-22-03-51.jpg","PHOTO-2025-08-22-19-50-02.jpg","PHOTO-2025-08-25-16-00-09.jpg","PHOTO-2025-08-29-23-12-03 2.jpg","PHOTO-2025-08-29-23-25-43.jpg","a3865b55-920a-4645-8506-b29304c63366.JPG","db7e6838-2bba-428d-92d6-d764392ebd83.JPG"],
+  "30. Sep 2025": ["IMG_5503.jpg","IMG_5521.jpg","IMG_5522.jpg","IMG_5540.jpg","IMG_5575.PNG","IMG_5609.jpg","IMG_5632.jpg","IMG_5640.jpg","IMG_5688.jpg","IMG_5781.jpg","IMG_5782.jpg","IMG_5783.jpg","IMG_5825.jpg","IMG_6130.jpg","IMG_6133.jpg","IMG_6348.jpg","IMG_6353.jpg","IMG_6436.jpg","IMG_6437.jpg","PHOTO-2025-09-12-09-45-12.jpg","PHOTO-2025-09-16-17-47-04.jpg","PHOTO-2025-09-19-18-34-22.jpg","PHOTO-2025-09-19-18-34-33.jpg","PHOTO-2025-09-21-06-28-49.jpg","PHOTO-2025-09-21-07-51-05.jpg","PHOTO-2025-09-21-20-57-38.jpg","PHOTO-2025-09-23-16-51-23.jpg","ef7b71c4-a9e8-4918-a765-bb09a77bdbb3.JPG"],
+  "31. Oct 2025": ["15594108-951f-43a3-8508-0d537cdb77c2.JPG","19622a09-f5be-4a11-8ef5-8ded779a1b4e.JPG","IMG_6474.jpg","IMG_6532.jpg","IMG_6601.jpg","IMG_6602.jpg","IMG_6607.jpg","IMG_6676.jpg","IMG_6806.jpg","IMG_6857.jpg","IMG_6914.jpg","IMG_6963.jpg","IMG_7027.jpg","IMG_7085.jpg","IMG_7091.jpg","PHOTO-2025-10-01-17-51-36.jpg","PHOTO-2025-10-01-19-33-15 2.jpg","PHOTO-2025-10-02-18-41-45.jpg","PHOTO-2025-10-03-09-58-27.jpg","PHOTO-2025-10-04-10-46-56.jpg","PHOTO-2025-10-13-19-25-08.jpg","PHOTO-2025-10-23-20-49-16.jpg","PHOTO-2025-10-25-01-09-14.jpg","PHOTO-2025-10-26-18-36-47.jpg","PHOTO-2025-10-29-16-09-13.jpg","PHOTO-2025-10-30-21-25-35.jpg","ef25ba2a-a2ff-4e95-bab1-d8c5affded49.JPG"],
+  "32. Nov 2025": ["41819053-EC74-4629-A06F-13B19FEDCDC5.JPG","46457846-2b5f-4f62-95ae-2d4dd0d96096.JPG","47712acd-870d-4641-a240-b70edb6ad2c2.JPG","4cff1c9a-a58d-44dc-97cc-3e4af7af316a.JPG","C2510BB5-38E5-4480-A814-E3092BFD9088.JPG","DSCF2741.JPG","DSCF2778.JPG","DSCF2800.JPG","DSCF2820.JPG","IMG_7140.jpg","IMG_7145.jpg","IMG_7206.jpg","IMG_7321.jpg","IMG_7344.jpg","IMG_7411.jpg","IMG_7562.jpg","IMG_7593.jpg","IMG_7626.JPG","IMG_7737.JPG","IMG_7789.jpg","IMG_7808.jpg","IMG_7899.jpg","IMG_8014.jpg","IMG_8980.JPG","IMG_8985.JPG","IMG_9344.JPG","IMG_9395.JPG","PHOTO-2025-11-04-18-06-49.jpg","PHOTO-2025-11-04-18-24-42.jpg","PHOTO-2025-11-06-16-16-57.jpg","PHOTO-2025-11-14-18-50-34.jpg","PHOTO-2025-11-18-19-55-34.jpg","PHOTO-2025-11-19-16-28-09.jpg","PHOTO-2025-11-20-20-07-39.jpg","PHOTO-2025-11-21-22-03-19.jpg","PHOTO-2025-11-21-23-36-36.jpg","PHOTO-2025-11-23-16-50-20.jpg","PHOTO-2025-11-30-17-46-15.jpg","b5cdb7a9-2ea2-4a13-be51-b623c73a20b5.JPG","b707b0ef-68ae-4285-96d8-868fb7c0d795.JPG","b8bc3b19-c941-4889-9d9e-bb00094c5f6a.JPG"],
+  "33. Dec 2025": ["1ca45bf0-7221-4bc2-a5db-8d9f3dfcef2b.JPG","378925e3-c758-4797-b193-7a8ada9c0e87 2.JPG","44a81a50-adf7-4b3a-bc9f-b90401db458b 2.JPG","4b67bfa3-ca16-4b76-b5f3-546741a4ec0c.JPG","65482305-892a-4c24-b218-d0393cce4809 2.JPG","6c43980a-570f-44ac-a8c2-7088769fff2a 2.JPG","7B67E6B8-047A-4822-BDC9-420C2098FB78 2.JPG","7BFAD512-48CC-47E0-B148-0E73AAEF1908 2.JPG","7a70b904-ea39-4793-8d07-e31835416e6b 2.JPG","IMG_8214 2.jpg","IMG_8234 2.jpg","IMG_8241 2.jpg","IMG_8250 2.jpg","IMG_8278 2.jpg","IMG_8279 2.jpg","IMG_8294 2.jpg","IMG_9189 2.jpg","IMG_9285.jpg","IMG_9297 2.jpg","IMG_9347 2.jpg","PHOTO-2025-12-02-19-12-35.jpg","PHOTO-2025-12-04-20-28-37.jpg","PHOTO-2025-12-04-23-41-49.jpg","PHOTO-2025-12-06-21-18-38.jpg","PHOTO-2025-12-17-23-36-09.jpg","PHOTO-2025-12-25-21-40-27.jpg","PHOTO-2025-12-30-12-07-03.jpg","PHOTO-2026-01-01-01-21-44.jpg","fdbd9633-befd-484c-9c76-ac4780d0f47d 2.JPG"],
+  "34. Jan 2026": ["8657e196-d480-4312-b231-49b10452a865.JPG","IMG_0035.jpg","IMG_0066.jpg","IMG_0094.jpg","IMG_0260.jpg","IMG_0321.jpg","IMG_9463.jpg","IMG_9559.jpg","IMG_9567.jpg","IMG_9674.jpg","IMG_9893.jpg","IMG_9907.jpg","IMG_9918.jpg","IMG_9956.jpg","PHOTO-2026-01-01-23-38-27.jpg","PHOTO-2026-01-01-23-38-33 2.jpg","PHOTO-2026-01-01-23-38-33.jpg","PHOTO-2026-01-03-20-20-13.jpg","PHOTO-2026-01-03-20-20-14.jpg","PHOTO-2026-01-03-20-20-35 2.jpg","PHOTO-2026-01-03-20-20-40.jpg","PHOTO-2026-01-03-20-20-51.jpg","PHOTO-2026-01-05-11-04-59.jpg","PHOTO-2026-01-21-17-34-33 2.jpg","PHOTO-2026-01-29-20-28-37.jpg"],
+  "35. Feb 2026": ["4077dd87-f535-41df-8a4c-9efab1d3dfbe.JPG","IMG_0760.jpg","IMG_0770.jpg","IMG_0922.jpg","IMG_0931.jpg","IMG_0937.jpg","IMG_0941.jpg","PHOTO-2026-02-04-18-22-42.jpg","PHOTO-2026-02-04-18-22-43.jpg","PHOTO-2026-02-07-11-43-56.jpg"]
+  /* ============================================================
+     ADD NEW MONTHS HERE:
+     "36. Mar 2026": ["file1.jpg", "file2.jpg", ...],
+     "37. Apr 2026": ["file1.jpg", "file2.jpg", ...],
+     ============================================================ */
+};
+
+/* ============================================================
+   MONTH NOTES — Add personal notes per month here
+   ============================================================ */
+const MONTH_NOTES = {
+  // "01. Apr 2023": "Where it all began...",
+  // "13. Apr 2024": "Happy 1st anniversary, my love!",
+  // "25. Apr 2025": "Two incredible years together!",
+};
+
+/* ============================================================
+   Configuration & Constants
+   ============================================================ */
+const ANNIVERSARY_DATE = new Date('2026-04-20T00:00:00');
+const PASSWORD = 'broadway';
+
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const MILESTONES = {
+  6:  { label: '6 Months',  type: 'milestone' },
+  12: { label: '1 Year',    type: 'anniversary' },
+  18: { label: '18 Months', type: 'milestone' },
+  24: { label: '2 Years',   type: 'anniversary' },
+  30: { label: '2.5 Years', type: 'milestone' },
+  36: { label: '3 Years',   type: 'anniversary' },
+};
+
+// Season mapping: month name -> season class
+const SEASON_MAP = {
+  'Mar': 'spring', 'Apr': 'spring', 'May': 'spring',
+  'Jun': 'summer', 'Jul': 'summer', 'Aug': 'summer',
+  'Sep': 'autumn', 'Oct': 'autumn', 'Nov': 'autumn',
+  'Dec': 'winter', 'Jan': 'winter', 'Feb': 'winter',
+};
+
+const folderKeys = Object.keys(IMAGE_MANIFEST);
+let currentMonthIndex = 0;
+let lightboxImages = [];
+let lightboxIndex = 0;
+let lightboxCurrentMonth = '';
+
+/* ============================================================
+   Lock Screen & Countdown
+   ============================================================ */
+function updateCountdowns() {
+  const now = new Date();
+  const diff = ANNIVERSARY_DATE - now;
+  const isPast = diff <= 0;
+
+  // Lock screen countdown
+  const lockCountdown = document.getElementById('lock-countdown');
+  const lockMsg = document.getElementById('lock-anniversary-msg');
+  if (isPast) {
+    lockCountdown.style.display = 'none';
+    lockMsg.style.display = 'block';
+  } else {
+    lockCountdown.style.display = 'flex';
+    lockMsg.style.display = 'none';
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('lock-days').textContent = d;
+    document.getElementById('lock-hours').textContent = h;
+    document.getElementById('lock-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('lock-secs').textContent = String(s).padStart(2, '0');
+  }
+
+  // Hero countdown
+  const heroCountdown = document.getElementById('hero-countdown');
+  const heroMsg = document.getElementById('hero-countdown-msg');
+  if (isPast) {
+    heroCountdown.style.display = 'none';
+    heroMsg.style.display = 'block';
+  } else {
+    heroCountdown.style.display = 'flex';
+    heroMsg.style.display = 'none';
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('hero-cd-days').textContent = d;
+    document.getElementById('hero-cd-hours').textContent = h;
+    document.getElementById('hero-cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('hero-cd-secs').textContent = String(s).padStart(2, '0');
+  }
+}
+
+function attemptUnlock() {
+  const input = document.getElementById('lock-password');
+  const error = document.getElementById('lock-error');
+  if (input.value.toLowerCase().trim() === PASSWORD) {
+    sessionStorage.setItem('zz_unlocked', '1');
+    document.getElementById('lock-screen').classList.add('hidden');
+    // Show music prompt after unlock
+    setTimeout(() => {
+      document.getElementById('music-prompt').classList.add('active');
+    }, 500);
+  } else {
+    error.classList.add('show');
+    input.value = '';
+    input.focus();
+    setTimeout(() => error.classList.remove('show'), 2000);
+  }
+}
+
+// Enter key on password
+document.getElementById('lock-password').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') attemptUnlock();
+});
+
+// Check session unlock
+function checkUnlockState() {
+  if (sessionStorage.getItem('zz_unlocked') === '1') {
+    document.getElementById('lock-screen').classList.add('hidden');
+  }
+}
+
+/* ============================================================
+   Music Prompt & Player
+   ============================================================ */
+const bgMusic = new Audio('bonfire-heart.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.4;
+
+function acceptMusicPrompt() {
+  document.getElementById('music-prompt').classList.remove('active');
+  bgMusic.play();
+  document.getElementById('music-toggle').classList.add('playing');
+}
+
+function skipMusicPrompt() {
+  document.getElementById('music-prompt').classList.remove('active');
+}
+
+function toggleMusic() {
+  const btn = document.getElementById('music-toggle');
+  if (btn.classList.contains('playing')) {
+    btn.classList.remove('playing');
+    bgMusic.pause();
+  } else {
+    btn.classList.add('playing');
+    bgMusic.play();
+  }
+}
+
+/* ============================================================
+   Dark / Light Mode
+   ============================================================ */
+function toggleTheme() {
+  const isDark = document.body.classList.toggle('dark-mode');
+  localStorage.setItem('zz_theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-icon').innerHTML = isDark ? '&#9788;' : '&#9790;';
+}
+
+function loadTheme() {
+  const saved = localStorage.getItem('zz_theme');
+  if (saved === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('theme-icon').innerHTML = '&#9788;';
+  }
+}
+
+/* ============================================================
+   Build the Gallery
+   ============================================================ */
+function buildGallery() {
+  const container = document.getElementById('gallery-container');
+  let totalPhotos = 0;
+
+  folderKeys.forEach((folder, idx) => {
+    const images = IMAGE_MANIFEST[folder];
+    totalPhotos += images.length;
+    const num = parseInt(folder.split('.')[0]);
+    const monthYear = folder.replace(/^\d+\.\s*/, '');
+    const parts = monthYear.split(' ');
+    const monthName = parts[0];
+    const year = parts[1];
+
+    // Determine season
+    const seasonClass = 'season-' + (SEASON_MAP[monthName.substring(0, 3)] || 'spring');
+
+    const section = document.createElement('div');
+    section.className = `month-section ${seasonClass}`;
+    section.id = `month-${idx + 1}`;
+    section.dataset.index = idx;
+
+    // Timeline dot
+    const dot = document.createElement('div');
+    dot.className = 'timeline-dot' + (MILESTONES[num] ? ' milestone-dot' : '');
+    dot.id = `timeline-dot-${idx}`;
+    container.appendChild(dot);
+
+    let milestoneHTML = '';
+    if (MILESTONES[num]) {
+      const m = MILESTONES[num];
+      milestoneHTML = `<div class="milestone-badge ${m.type}">${m.type === 'anniversary' ? '&#10084; ' : '&#10022; '}${m.label}</div>`;
+    }
+
+    let noteHTML = '';
+    if (MONTH_NOTES[folder]) {
+      noteHTML = `<p class="month-note">"${MONTH_NOTES[folder]}"</p>`;
+    }
+
+    let gridHTML = '<div class="photo-grid">';
+    images.forEach((img, imgIdx) => {
+      const isWide = images.length > 4 && (imgIdx === 0 || (imgIdx === Math.floor(images.length / 2) && images.length > 8));
+      const encodedFolder = encodeURIComponent(folder);
+      const encodedImg = encodeURIComponent(img);
+      const src = `${encodedFolder}/${encodedImg}`;
+      gridHTML += `
+        <div class="photo-item${isWide ? ' wide' : ''}" onclick="openLightbox('${folder.replace(/'/g, "\\'")}', ${imgIdx})">
+          <img src="${src}" alt="${monthName} ${year}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>`;
+    });
+    gridHTML += '</div>';
+
+    section.innerHTML = `
+      <div class="month-header">
+        <div class="month-number">Month ${num}</div>
+        <h2 class="month-title">${monthName} ${year}</h2>
+        <div class="month-photo-count">${images.length} memor${images.length === 1 ? 'y' : 'ies'}</div>
+        ${milestoneHTML}
+        ${noteHTML}
+        <button class="slideshow-btn" onclick="startSlideshow('${folder.replace(/'/g, "\\'")}')">&#9654; Slideshow</button>
+      </div>
+      ${gridHTML}
+    `;
+
+    if (idx > 0) {
+      const divider = document.createElement('div');
+      divider.className = 'month-divider';
+      divider.innerHTML = '<div class="month-divider-line"></div><div class="month-divider-symbol">&#9825;</div><div class="month-divider-line"></div>';
+      container.appendChild(divider);
+    }
+    container.appendChild(section);
+  });
+
+  document.getElementById('photo-total-count').textContent = totalPhotos;
+  buildMonthDropdown();
+  positionTimelineDots();
+}
+
+/* ============================================================
+   Timeline Connector — Position Dots & Animate Fill
+   ============================================================ */
+function positionTimelineDots() {
+  const container = document.getElementById('gallery-container');
+  const containerTop = container.offsetTop;
+
+  folderKeys.forEach((folder, idx) => {
+    const section = document.getElementById(`month-${idx + 1}`);
+    const dot = document.getElementById(`timeline-dot-${idx}`);
+    if (section && dot) {
+      dot.style.top = (section.offsetTop - containerTop + 60) + 'px';
+    }
+  });
+}
+
+function updateTimelineConnector() {
+  const container = document.getElementById('gallery-container');
+  const fill = document.getElementById('timeline-connector-fill');
+  const containerRect = container.getBoundingClientRect();
+  const containerHeight = container.scrollHeight;
+
+  // How far we've scrolled through the gallery container
+  const scrolledPast = Math.max(0, -containerRect.top);
+  const fillPct = Math.min(scrolledPast / containerHeight * 100, 100);
+  fill.style.height = fillPct + '%';
+
+  // Mark dots as reached
+  folderKeys.forEach((folder, idx) => {
+    const dot = document.getElementById(`timeline-dot-${idx}`);
+    if (dot) {
+      const dotTop = parseFloat(dot.style.top) || 0;
+      const reached = scrolledPast >= dotTop - 100;
+      dot.classList.toggle('reached', reached);
+    }
+  });
+}
+
+/* ============================================================
+   Month Dropdown
+   ============================================================ */
+function buildMonthDropdown() {
+  const dropdown = document.getElementById('month-dropdown');
+  let html = '';
+  let currentYear = '';
+
+  folderKeys.forEach((folder, idx) => {
+    const num = parseInt(folder.split('.')[0]);
+    const monthYear = folder.replace(/^\d+\.\s*/, '');
+    const parts = monthYear.split(' ');
+    const year = parts[1];
+    const monthShort = parts[0].substring(0, 3);
+
+    if (year !== currentYear) {
+      if (currentYear) html += '</div>';
+      currentYear = year;
+      html += `<div class="month-dropdown-year">${year}</div><div class="month-dropdown-grid">`;
+    }
+
+    const isMilestone = MILESTONES[num] ? ' milestone' : '';
+    html += `<div class="month-dropdown-item${isMilestone}" data-index="${idx}" onclick="jumpToMonth(${idx})">${monthShort}</div>`;
+  });
+  html += '</div>';
+  dropdown.innerHTML = html;
+}
+
+function toggleMonthDropdown() {
+  document.getElementById('month-dropdown').classList.toggle('open');
+}
+
+function jumpToMonth(idx) {
+  document.getElementById(`month-${idx + 1}`).scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('month-dropdown').classList.remove('open');
+}
+
+/* ============================================================
+   Scroll Tracking & Navigation
+   ============================================================ */
+function updateActiveMonth() {
+  const sections = document.querySelectorAll('.month-section');
+  const navHeight = 70;
+  let activeIdx = 0;
+
+  sections.forEach((section, idx) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight / 3 + navHeight) {
+      activeIdx = idx;
+    }
+    if (rect.top < window.innerHeight * 0.85) {
+      section.classList.add('visible');
+    }
+  });
+
+  if (activeIdx !== currentMonthIndex) {
+    currentMonthIndex = activeIdx;
+    updateNavState();
+  }
+
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = Math.min(scrollTop / docHeight * 100, 100);
+  document.getElementById('progress-fill').style.width = progress + '%';
+  document.getElementById('progress-dot').style.left = progress + '%';
+
+  document.getElementById('back-to-top').classList.toggle('show', scrollTop > 600);
+  document.getElementById('timeline-nav').classList.toggle('scrolled', scrollTop > 100);
+
+  updateTimelineConnector();
+}
+
+function updateNavState() {
+  const folder = folderKeys[currentMonthIndex];
+  const monthYear = folder.replace(/^\d+\.\s*/, '');
+  document.getElementById('current-month-label').textContent = monthYear;
+
+  document.getElementById('prev-btn').disabled = currentMonthIndex === 0;
+  document.getElementById('next-btn').disabled = currentMonthIndex === folderKeys.length - 1;
+
+  document.querySelectorAll('.month-dropdown-item').forEach(item => {
+    item.classList.toggle('active', parseInt(item.dataset.index) === currentMonthIndex);
+  });
+}
+
+function navigateMonth(dir) {
+  const newIdx = currentMonthIndex + dir;
+  if (newIdx >= 0 && newIdx < folderKeys.length) {
+    jumpToMonth(newIdx);
+  }
+}
+
+/* ============================================================
+   Lightbox
+   ============================================================ */
+function openLightbox(folder, imgIdx) {
+  lightboxImages = IMAGE_MANIFEST[folder];
+  lightboxIndex = imgIdx;
+  lightboxCurrentMonth = folder.replace(/^\d+\.\s*/, '');
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+  if (slideshowTimer) { clearInterval(slideshowTimer); slideshowTimer = null; }
+}
+
+function lightboxNav(dir) {
+  lightboxIndex += dir;
+  if (lightboxIndex < 0) lightboxIndex = lightboxImages.length - 1;
+  if (lightboxIndex >= lightboxImages.length) lightboxIndex = 0;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const folder = folderKeys.find(k => k.includes(lightboxCurrentMonth)) || folderKeys[currentMonthIndex];
+  const encodedFolder = encodeURIComponent(folder);
+  const encodedImg = encodeURIComponent(lightboxImages[lightboxIndex]);
+  document.getElementById('lightbox-img').src = `${encodedFolder}/${encodedImg}`;
+  document.getElementById('lightbox-counter').textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+  document.getElementById('lightbox-month').textContent = lightboxCurrentMonth;
+}
+
+/* ============================================================
+   Slideshow
+   ============================================================ */
+let slideshowTimer = null;
+
+function startSlideshow(folder) {
+  openLightbox(folder, 0);
+  if (slideshowTimer) clearInterval(slideshowTimer);
+  slideshowTimer = setInterval(() => {
+    lightboxIndex++;
+    if (lightboxIndex >= lightboxImages.length) {
+      clearInterval(slideshowTimer);
+      slideshowTimer = null;
+      closeLightbox();
+      return;
+    }
+    updateLightbox();
+  }, 3000);
+}
+
+/* ============================================================
+   Guess the Month Game
+   ============================================================ */
+let gameScore = 0;
+let gameTotal = 0;
+let gameCorrectFolder = '';
+
+function openGame() {
+  document.getElementById('game-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  gameScore = 0;
+  gameTotal = 0;
+  document.getElementById('game-score').textContent = '0 / 0';
+  nextGameRound();
+}
+
+function closeGame() {
+  document.getElementById('game-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function nextGameRound() {
+  document.getElementById('game-result').textContent = '';
+  document.getElementById('game-next-btn').style.display = 'none';
+
+  // Pick a random folder and photo
+  const randFolderIdx = Math.floor(Math.random() * folderKeys.length);
+  gameCorrectFolder = folderKeys[randFolderIdx];
+  const images = IMAGE_MANIFEST[gameCorrectFolder];
+  const randImg = images[Math.floor(Math.random() * images.length)];
+
+  const encodedFolder = encodeURIComponent(gameCorrectFolder);
+  const encodedImg = encodeURIComponent(randImg);
+  document.getElementById('game-photo').src = `${encodedFolder}/${encodedImg}`;
+
+  // Build 4 options (1 correct + 3 wrong)
+  const correctLabel = gameCorrectFolder.replace(/^\d+\.\s*/, '');
+  const wrongOptions = [];
+  while (wrongOptions.length < 3) {
+    const ri = Math.floor(Math.random() * folderKeys.length);
+    if (ri !== randFolderIdx) {
+      const label = folderKeys[ri].replace(/^\d+\.\s*/, '');
+      if (!wrongOptions.includes(label)) wrongOptions.push(label);
+    }
+  }
+
+  const allOptions = [correctLabel, ...wrongOptions].sort(() => Math.random() - 0.5);
+  const optionsContainer = document.getElementById('game-options');
+  optionsContainer.innerHTML = '';
+
+  allOptions.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'game-option';
+    btn.textContent = opt;
+    btn.onclick = () => handleGameAnswer(btn, opt, correctLabel);
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleGameAnswer(btn, selected, correct) {
+  gameTotal++;
+  const buttons = document.querySelectorAll('.game-option');
+  buttons.forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) b.classList.add('correct');
+  });
+
+  if (selected === correct) {
+    gameScore++;
+    document.getElementById('game-result').textContent = 'You know us so well!';
+  } else {
+    btn.classList.add('wrong');
+    document.getElementById('game-result').textContent = `It was ${correct}`;
+  }
+
+  document.getElementById('game-score').textContent = `${gameScore} / ${gameTotal}`;
+  document.getElementById('game-next-btn').style.display = 'inline-block';
+}
+
+/* ============================================================
+   Keyboard Navigation
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  // Game modal
+  if (document.getElementById('game-modal').classList.contains('active')) {
+    if (e.key === 'Escape') closeGame();
+    return;
+  }
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  if (lb.classList.contains('active')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    return;
+  }
+  if (e.key === 'ArrowLeft') navigateMonth(-1);
+  if (e.key === 'ArrowRight') navigateMonth(1);
+});
+
+// Close dropdown on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#month-selector-btn') && !e.target.closest('#month-dropdown')) {
+    document.getElementById('month-dropdown').classList.remove('open');
+  }
+});
+
+// Progress bar click to jump
+document.getElementById('progress-bar').addEventListener('click', (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  const idx = Math.round(pct * (folderKeys.length - 1));
+  jumpToMonth(Math.max(0, Math.min(idx, folderKeys.length - 1)));
+});
+
+/* ============================================================
+   Initialize
+   ============================================================ */
+checkUnlockState();
+loadTheme();
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
+
+window.addEventListener('scroll', updateActiveMonth, { passive: true });
+window.addEventListener('resize', positionTimelineDots);
+
+buildGallery();
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hidden');
+  }, 1500);
+  updateActiveMonth();
+  updateNavState();
+});
+</script>
+
+</body>
+</html>
