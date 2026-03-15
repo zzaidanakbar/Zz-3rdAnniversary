@@ -900,14 +900,33 @@ body.dark-mode .month-section.season-winter { background: rgba(150,180,220,0.07)
   margin-top: 6px;
 }
 .month-note {
-  max-width: 500px;
+  max-width: 560px;
   margin: 16px auto 0;
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 15px;
   font-style: italic;
   color: var(--text-soft);
-  text-align: center;
-  line-height: 1.5;
+  text-align: left;
+  line-height: 1.6;
+}
+.month-note ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.month-note li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+}
+.month-note li::before {
+  content: '♥';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 12px;
+  top: 2px;
+  font-style: normal;
 }
 
 /* Milestone Badges */
@@ -1654,9 +1673,167 @@ const IMAGE_MANIFEST = {
    MONTH NOTES — Add personal notes per month here
    ============================================================ */
 const MONTH_NOTES = {
-  // "01. Apr 2023": "Where it all began...",
-  // "13. Apr 2024": "Happy 1st anniversary, my love!",
-  // "25. Apr 2025": "Two incredible years together!",
+  "01. Apr 2023": [
+    "Our first date, I went to Jakarta, accompanied you to Binus for your exam submission and then we went to Broadway and made our first memory.",
+    "Officially in a relationship after I brought Udang and Ebi as a surprise for you and also KFC for your fam. Not long after that I have to go back to Malang and we spent a quick date at Emilia."
+  ],
+  "02. May 2023": [
+    "I went to Jakarta for a quick 2 days to just visit you and we created our first love memory and party!"
+  ],
+  "03. Jun 2023": [
+    "Wall climbing date! with Enzo! Surprisingly, Zeezee is so strong!",
+    "Waterfall date! with my fam, unfortunately you're having your period so you can't swim",
+    "First Warteg Agung date!"
+  ],
+  "04. Jul 2023": [
+    "Bintaro! BXC Haunted House.",
+    "Picking up Enzo from school",
+    "Went to Grand Indonesia with Enzo",
+    "Run at GBK before Zeezee loved running that much"
+  ],
+  "05. Aug 2023": [
+    "I surprised you in Bali for your 20th Birthday 🎂",
+    "We had soooo muchh fuuunnn in Bali!!!!"
+  ],
+  "06. Sep 2023": [
+    "Zeezee surprised me with plenty of bday presents after I had an event in Jakarta for just a brief moment"
+  ],
+  "07. Oct 2023": [
+    "DON'T CHANGE A THING YOU'RE AMAZING… REX ORANGE COUNTY CONCERT!!! 🎶"
+  ],
+  "08. Nov 2023": [
+    "Just casual running date and photobooth at Blok M Plaza",
+    "I went home for YLI event, I forgot what drama we had here that made you walked to the event venue to see me. That day it's raining and you brought umbrella hahaha funny memory ☔"
+  ],
+  "09. Dec 2023": [
+    "Austin's first visit to Jakarta, we went to Puncak to visit Ney.",
+    "And another running dates 🏃"
+  ],
+  "10. Jan 2024": [
+    "2024 new year! Zeezee accompanied me running 24k for the new year riding bicycle when it's your first period day! What a lovely effort.",
+    "We found Buntel in IKEA",
+    "Created 2024 resolution while eating sushi really slooowwlyyy 🍣",
+    "Sharing donation and food!",
+    "Visit BCA Pluit for Zeezee internship onboarding and then ate seafood in Muara Angke and then I'm sick",
+    "Enzo fell from his scooter at GBK!",
+    "Culinary date at Petak Enam"
+  ],
+  "11. Feb 2024": [
+    "Taman Safari date! You found Shifu! 🐼",
+    "Zeezee's first working day! I brought you flowers! 💐"
+  ],
+  "12. Mar 2024": [
+    "Food and Run mostly! hahaha 🍔🏃"
+  ],
+  "13. Apr 2024": [
+    "We worked really close! Our offices were at the same MRT line.",
+    "We had our lunch break together!",
+    "1st Anniversary! Broadway again! ❤️"
+  ],
+  "14. May 2024": [
+    "Bali! Again!!! Syal Wedding. ✈️",
+    "Zeezee fell down when running and bruised your knee."
+  ],
+  "15. Jun 2024": [
+    "Enzo's Piano Concert 🎹",
+    "Zeezee running fast",
+    "Run in Sentul! Without planning…"
+  ],
+  "16. Jul 2024": [
+    "Zeezee's half marathon training",
+    "Zeezee had a haircut! ✂️",
+    "Zeezee bday run! Half marathon (because your bday is not on the weekend so we ran on the weekend before your bday)"
+  ],
+  "17. Aug 2024": [
+    "Zeezee's bday! 🎂",
+    "Almost time for me to start my master study!"
+  ],
+  "18. Sep 2024": [
+    "Got plenty of lovely presents from Zeezee for my bday 🎁",
+    "Sayonaraa! LDR Edinburgh-Jakarta started ✈️",
+    "You still worked at BCA, I'm starting my masters"
+  ],
+  "19. Oct 2024": [
+    "We had a great fight. I learned a lot and really regret my actions. I know how much I love you and don't want to lose you 💔→❤️",
+    "I ran my first race in the UK 🏃",
+    "Zeezee had an office trip"
+  ],
+  "20. Nov 2024": [
+    "Winter in the UK. First snow! ❄️",
+    "I visited London for the first time 🇬🇧",
+    "Zeezee went out with mama papa to eat taichan. Zeezee got bubu dudu keychains"
+  ],
+  "21. Dec 2024": [
+    "Zeezee went to Japan! 🇯🇵",
+    "More snow in the UK and more M&S donuts 🍩"
+  ],
+  "22. Jan 2025": [
+    "I visited Morocco 🇲🇦",
+    "Zeezee still in Japan",
+    "Zeezee went to Broadway with my fam! And had a birthday dinner with them for Bang Affan and Papa's bday"
+  ],
+  "23. Feb 2025": [
+    "I visited Wales 🏴",
+    "Lala the dragon was found here! 🐉",
+    "You treated me expensive burger! 🍔",
+    "Zeezee's doing research for your final thesis."
+  ],
+  "24. Mar 2025": [
+    "Zeezee's TikTok live going viral 📱",
+    "Ied Fitri by myself"
+  ],
+  "25. Apr 2025": [
+    "I went to Orkney Islands for research.",
+    "I found Mr Puffin here! 🐧",
+    "First time met Hamish! 🐾",
+    "Sepi reached Jakarta. Lala too!",
+    "2nd Anniversary! Gift exchange far far away! ❤️"
+  ],
+  "26. May 2025": [
+    "Pentland Hike with Om Tom and Tanika ⛰️",
+    "You were celebrating mama's bday just the three of you with papa without anyone else!",
+    "Hamish hamish hamish 🐾"
+  ],
+  "27. Jun 2025": [
+    "I visited Oxford, went for a swim in Pentland Hills and more Hamish.",
+    "New Garmin from Jakarta, thank you Zeezee! ⌚",
+    "Zeezee's pretty pictures like always 📸"
+  ],
+  "28. Jul 2025": [
+    "Arthur Seat hike with Hamish ⛰️",
+    "You completed your Undergraduate thesis! And then you went to Kidzania 🎓"
+  ],
+  "29. Aug 2025": [
+    "Pentland House farewell!",
+    "Zeezee's 22nd Birthday! 🎂",
+    "100k Run! 🏃"
+  ],
+  "30. Sep 2025": [
+    "I moved to Cornwall for work",
+    "Mr Crabby was found here! 🦀",
+    "I love pasty"
+  ],
+  "31. Oct 2025": [
+    "I have to run to work and always call Zeezee to accompany me 📞",
+    "Zeezee workout routine because want to meet me soon! hehe 💪"
+  ],
+  "32. Nov 2025": [
+    "Mama papa goes to UK! 🇬🇧",
+    "My graduation! 🎓"
+  ],
+  "33. Dec 2025": [
+    "We meet again!!! At last after more than a year… 🥹",
+    "Then… Zeezee went to Bali",
+    "Then… I went to Jogja, another short LDR"
+  ],
+  "34. Jan 2026": [
+    "Gym dates, plenty of them 💪",
+    "So productive… we launched Zendokku 🚀",
+    "I started working in ACE"
+  ],
+  "35. Feb 2026": [
+    "More dates, more foods, more love ❤️"
+  ],
 };
 
 /* ============================================================
@@ -1850,7 +2027,13 @@ function buildGallery() {
 
     let noteHTML = '';
     if (MONTH_NOTES[folder]) {
-      noteHTML = `<p class="month-note">"${MONTH_NOTES[folder]}"</p>`;
+      const notes = MONTH_NOTES[folder];
+      if (Array.isArray(notes)) {
+        const items = notes.map(n => `<li>${n}</li>`).join('');
+        noteHTML = `<div class="month-note"><ul>${items}</ul></div>`;
+      } else {
+        noteHTML = `<p class="month-note">"${notes}"</p>`;
+      }
     }
 
     let gridHTML = '<div class="photo-grid">';
